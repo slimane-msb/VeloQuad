@@ -1,0 +1,13 @@
+[package]
+name = "veloquad"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "veloquad"
+path = "src/lib.rs"
+
+[[bin]]
+name = "veloquad"
+path = "src/main.rs"
+

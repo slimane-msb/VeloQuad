@@ -1,0 +1,34 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+vquad
+
+# Other files and folders
+.settings/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
+#plan 
+plan.md
+
+
+
+# pdf
+*.pdf
+
+# caml output
+*.exe 
+*.bin
+*.cmo 
+*.cmi 
+*.cmx 
+*.0
+*.o
+exe

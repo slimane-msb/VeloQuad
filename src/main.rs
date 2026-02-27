@@ -6,6 +6,7 @@ mod models;
 mod quadtree;
 
 use std::collections::HashMap;
+use std::env;
 
 use algo::dijkstra;
 use graph::{build_graph, find_nearest};
@@ -13,7 +14,16 @@ use input::read_input;
 use quadtree::{build_quad, collect_free};
 
 fn main() {
-    let (n, obstacles) = read_input("./data/tree.txt");
+    let args: Vec<String> = env::args().collect();
+    let file_path = match args.len() {
+        2 => &args[1],
+        3 if args[1] == "-f" => &args[2],
+        _ => {
+            eprintln!("Usage: {} [-f] <file_path>", args[0]);
+            std::process::exit(1);
+        }
+    };
+    let (n, obstacles) = read_input(file_path);
 
     println!("Grille: {}x{}, Obstacles: {}", n, n, obstacles.len());
 

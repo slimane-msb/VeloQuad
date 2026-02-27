@@ -78,29 +78,76 @@ Field → Quadtree → Graph Vertices → Shortest Path
 
 ## Build & Execution
 
-### Prerequisites
-- OCaml compiler (≥4.12)
-- Unix library (`unix.cma`)
 
-### Compilation Commands
+### Build & Setup
 
-**Baseline Version (Grid-based)**:
+The easiest way to manage the project is via the provided `Makefile`.
+
 ```bash
-ocamlc unix.cma version1.ml version1Test.ml -o pathfinder
-./pathfinder field_data.txt
+# Build both Rust and OCaml versions
+make all
+
+# Clean build artifacts
+make clean
+
 ```
 
-**Optimized Version (Quadtree-based)**:
+#### Manual Compilation
+
+If you prefer manual commands:
+
+* **Rust:** `cargo build --release`
+* **OCaml:** `ocamlopt -o benches/Ocaml/vquad.bin unix.cmxa benches/Ocaml/vquad.ml`
+
+---
+
+### Testing
+
+#### **Rust Integration Tests**
+
+The Rust suite validates the core logic across three main domains.
+
 ```bash
-ocamlc unix.cma version1.ml version2.ml dijkstra.ml version2Test.ml -o pathfinder
-./pathfinder field_data.txt
+# Run all tests
+make test-rust
+
+# Or run specific modules directly via cargo
+cargo test --test algo_tests
+cargo test --test quadtree_tests
+
 ```
 
-**Production Build (Recommended)**:
+#### **Running Benchmarks**
+
+Execute the pathfinder on your map data (Default: `data/map.txt`):
+
 ```bash
-ocamlc unix.cma version1.ml version2.ml version3.ml main_optimise.ml -o pathfinder
-./pathfinder field_data.txt
+# Run Rust version
+make run-rust
+
+# Run OCaml version
+make run-ocaml
+
 ```
+
+---
+
+### Input Format
+
+The map files (`.txt`) should follow this structure:
+
+1. **Size:** $2^n$ (e.g., 128, 256)
+2. **Obstacle Count:** Integer $R$
+3. **Obstacles:** $R$ lines of `x y width height`
+
+```text
+128
+2
+10 10 50 10
+70 40 10 60
+
+```
+
 
 ## Performance Analysis
 

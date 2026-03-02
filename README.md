@@ -1,6 +1,7 @@
 # Intelligent Pathfinding Engine with Quadtree Optimization
 
 > High-performance spatial pathfinding system using advanced graph theory and adaptive spatial partitioning
+
 [![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://www.rust-lang.org/)
 [![OCaml](https://img.shields.io/badge/OCaml-EC6813?style=flat&logo=ocaml&logoColor=white)](https://ocaml.org/)
 [![Algorithm](https://img.shields.io/badge/Algorithm-Dijkstra-blue)](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)

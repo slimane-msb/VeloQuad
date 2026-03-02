@@ -14,7 +14,7 @@ test-rust:
 	cargo test
 
 run-rust:
-	cargo run -- $(MAP_FILE)
+	cargo run -- $(MAP_FILE) $(ARGS)
 
 # --- OCaml Commands ---
 build-ocaml:

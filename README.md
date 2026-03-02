@@ -124,6 +124,8 @@ Execute the pathfinder on your map data (Default: `data/map.txt`):
 ```bash
 # Run Rust version
 make run-rust
+# Add Start sx sy and End ex ey 
+make run-rust ARGS="1 2 8 9"
 
 # Run OCaml version
 make run-ocaml

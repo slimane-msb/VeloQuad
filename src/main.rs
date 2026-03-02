@@ -14,33 +14,50 @@ use input::read_input;
 use quadtree::{build_quad, collect_free};
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
-    let file_path = match args.len() {
-        2 => &args[1],
-        3 if args[1] == "-f" => &args[2],
-        _ => {
-            eprintln!("Usage: {} [-f] <file_path>", args[0]);
-            std::process::exit(1);
-        }
+    let mut args = env::args().skip(1); 
+
+    // Handle optional -f
+    let first = args.next().expect("Missing file path");
+    let file_path = if first == "-f" {
+        args.next().expect("Missing file path after -f")
+    } else {
+        first
     };
-    let (n, obstacles) = read_input(file_path);
+
+    // Default coordinates
+    let mut sx = 0;
+    let mut sy = 0;
+    let mut gx = 7;
+    let mut gy = 7;
+
+    // If 4 extra args exist, override defaults
+    if let (Some(a), Some(b), Some(c), Some(d)) =
+        (args.next(), args.next(), args.next(), args.next())
+    {
+        sx = a.parse().expect("Invalid start x");
+        sy = b.parse().expect("Invalid start y");
+        gx = c.parse().expect("Invalid goal x");
+        gy = d.parse().expect("Invalid goal y");
+    }
+
+    let (n, obstacles) = read_input(&file_path);
 
     println!("Grille: {}x{}, Obstacles: {}", n, n, obstacles.len());
 
     let quad = build_quad(&obstacles, 0, 0, n);
 
     let mut centers: HashMap<usize, (f64, f64)> = HashMap::new();
-    let mut id: usize = 0;
+    let mut id = 0;
     collect_free(&quad, &mut id, &mut centers);
 
     println!("Régions libres: {}", centers.len());
 
     let mut graph = vec![vec![]; centers.len()];
-    let mut id: usize = 0;
+    let mut id = 0;
     build_graph(&quad, &mut id, &mut graph, &centers);
 
-    let start = find_nearest(n / 2, 0, &centers);
-    let goal = find_nearest(n / 2, n - 1, &centers);
+    let start = find_nearest(sx, sy, &centers);
+    let goal = find_nearest(gx, gy, &centers);
 
     match dijkstra(&graph, start, goal) {
         Some(dist) => println!("Distance trouvée: {:.2}", dist),

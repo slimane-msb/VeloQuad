@@ -11,7 +11,7 @@
 
 An intelligent pathfinding system that computes optimal routes through 2D obstacle fields by leveraging graph theory, spatial indexing, and algorithmic optimization. The project demonstrates progressive optimization techniques, achieving **sub-millisecond pathfinding** through adaptive spatial partitioning.
 
-**Key Achievement**: Reduced computational complexity from O(n²) to O(log n) through quadtree-based spatial decomposition.
+**Key Achievement**: Reduced computational complexity from O(n²) to O(R.log n) through quadtree-based spatial decomposition, Where R is the number of obstacles.
 
 ## Technical Highlights
 
@@ -53,7 +53,7 @@ x y width height     # Obstacle specifications (r lines)
 ### Version 2: Quadtree Optimization ⭐
 - **Data Structure**: Adaptive quadtree spatial partitioning
 - **Graph Model**: Vertices represent free regions; weighted edges use Euclidean distances
-- **Complexity**: O(log n) average case for sparse obstacle fields
+- **Complexity**: O(R.log n) average case for sparse obstacle fields
 - **Innovation**: Dramatically reduces graph size for large, sparsely-populated fields
 
 ### Version 3: Production-Ready Optimization
